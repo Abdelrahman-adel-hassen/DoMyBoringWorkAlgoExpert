@@ -8,6 +8,7 @@ class Program
     static void Main()
     {
         int[] timeArray = { 58, 49, 60, 47, 48, 48, 47, 37, 40, 51, 45, 39, 42 };
+        bool[] isRecorded = { true, true, true, true, true, true, true, true, false, false, false, false, false };
         //int[] timeArray = { 1, 1, 60, 47, 48, 48, 47, 37, 40, 51, 45, 39, 42 };
 
         string[] linksArray = [
@@ -27,6 +28,8 @@ class Program
         ];
         for (int i = 0; i < linksArray.Length; i++)
         {
+            if (isRecorded[i])
+                continue;
             var sim = new InputSimulator();
 
             string browserPath = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"; // Update this path
@@ -69,7 +72,6 @@ class Program
             Console.WriteLine("Recording started.");
             Console.WriteLine("Performing tasks...");
             Thread.Sleep(timeArray[i] * 60000);
-
             StartStopRecording(sim);
             Console.WriteLine("Recording stopped.");
 
@@ -79,7 +81,6 @@ class Program
                 browserProcess.Kill();
                 Console.WriteLine("Browser closed.");
             }
-            Console.WriteLine("Browser closed.");
         }
 
     }
